@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+<ul class="navbar-nav ml-auto">
+  <li>
+    <h1 class="h3 mb-2 text-gray-800" style="margin-top: 20px;float: right;">Education</h1>
+  </li>
+</ul>
+
+{% endblock %}
+
+
+{% block resume %}
+<style type="text/css">
+  h5{
+    color: #222222
+  }
+</style>
+
+<div class="container-fluid">
+  <label>NB: Upload a pdf form of your resume</label>
+	<form method="post" enctype="multipart/form-data">
+      
+      <div class="custom-file">
+        <input type="file" class="custom-file-input" id="validatedCustomFile" required accept='pdf/*' name="res">
+        <label class="custom-file-label" for="validatedCustomFile">Resume</label>
+        <div class="invalid-feedback">Invalid file type, choose an image</div>
+      </div>
+		
+		<button type="submit" class="genric-btn primary-border circle arrow" style="margin-top: 30px;">Add resume<span class="lnr lnr-arrow-right"></span></button>
+	</form>
+	{% if msg == 'success' %}
+      <div class="alert alert-success" role="alert" style="margin-top: 20px">
+        Added experience successfully
+      </div>
+  {% elif msg == 'error' %}
+  <div class="alert alert-danger" role="alert" style="margin-top: 20px">
+    Error adding experience
+  </div>
+  {% endif %}
+
+</div>
+
+{% endblock %}

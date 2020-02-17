@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+<ul class="navbar-nav ml-auto">
+  <li>
+    <h1 class="h3 mb-2 text-gray-800" style="margin-top: 20px;float: right;">Portfolio</h1>
+  </li>
+</ul>
+
+{% endblock %}
+
+
+{% block portfolio %}
+<style type="text/css">
+  h5{
+    color: #222222
+  }
+</style>
+
+<div class="container-fluid">
+  <label>Make sure to add a portfolio category before you add a project</label>
+	<form method="post" enctype="multipart/form-data">
+    <div class="form-row">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Project name" name="name" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Date completed</label>
+          <input type="text" required class="form-control" placeholder="Date Completed" name="completed">
+        </div>
+        <div class="form-group">
+          <textarea placeholder="Project Description" style="width: 100%" name='desc'></textarea>
+        </div>
+        <div class="form-group">
+          <div class="single-element-widget">
+              <h5 class="mb-30">Client</h5>
+              <div class="default-select" id="default-select">
+                <select name="client">
+                  <option value="Client Project">Client Project</option>
+                  <option value="Personal Project">Personal Project</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+        </div>
+        <div class="form-group">
+          <div class="single-element-widget">
+              <h5 class="mb-30">Project category</h5>
+              <div class="default-select" id="default-select">
+                <select name="category">
+                  {% for _ in exist %}
+                    <option value="{{ _|replace(' ', '_') }}">{{ _ }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+        </div>
+
+      <div class="custom-file">
+        <input type="file" class="custom-file-input" id="validatedCustomFile" required accept='image/*' name="img">
+        <label class="custom-file-label" for="validatedCustomFile">Project Image/Banner</label>
+        <div class="invalid-feedback">Invalid file type, choose an image</div>
+      </div>
+		
+		<button type="submit" class="genric-btn primary-border circle arrow" style="margin-top: 30px;">Add project<span class="lnr lnr-arrow-right"></span></button>
+	</form>
+	{% if msg == 'success' %}
+        <div class="alert alert-success" role="alert" style="margin-top: 20px">
+          Added project successfully
+        </div>
+    {% elif msg == 'error' %}
+    <div class="alert alert-danger" role="alert" style="margin-top: 20px; width: 30%">
+      Error adding project
+    </div>
+    {% endif %}
+	
+</div>
+
+{% endblock %}

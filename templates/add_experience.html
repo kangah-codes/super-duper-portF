@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+<ul class="navbar-nav ml-auto">
+  <li>
+    <h1 class="h3 mb-2 text-gray-800" style="margin-top: 20px;float: right;">Job Experience</h1>
+  </li>
+</ul>
+
+{% endblock %}
+
+
+{% block portfolio %}
+<style type="text/css">
+  h5{
+    color: #222222
+  }
+</style>
+
+<div class="container-fluid">
+	<form method="post" enctype="multipart/form-data">
+    <div class="form-row">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Post held" name="post" required>
+          </div>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Company" name="company" required>
+          </div>
+          <div class="form-group">
+          <label>Date started</label>
+          <input type="text" required class="form-control" placeholder="Date Started eg (09/06/2001, (9th Jun 2001)) " name="start">
+        </div>
+        <div class="form-group">
+          <label>Date completed</label>
+          <input type="text" required class="form-control" placeholder="Date Completed" name="end">
+        </div>
+        <div class="form-group">
+          <textarea placeholder="Job description" style="width: 100%" name='desc'></textarea>
+        </div>
+		
+		<button type="submit" class="genric-btn primary-border circle arrow" style="margin-top: 30px;">Add experience<span class="lnr lnr-arrow-right"></span></button>
+	</form>
+	{% if msg == 'success' %}
+        <div class="alert alert-success" role="alert" style="margin-top: 20px">
+          Added experience successfully
+        </div>
+    {% elif msg == 'error' %}
+    <div class="alert alert-danger" role="alert" style="margin-top: 20px">
+      Error adding experience
+    </div>
+    {% endif %}
+	
+</div>
+
+{% endblock %}

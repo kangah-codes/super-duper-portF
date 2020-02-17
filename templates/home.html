@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+<ul class="navbar-nav ml-auto">
+  <li class="">
+    <h1 class="h3 mb-2 text-gray-800" style="margin-top: 20px;float: right;">Updated Components</h1>
+  </li>
+</ul>
+
+{% endblock %}
+
+{% block home %}
+  <style type="text/css">
+    h4, p{
+      color: #222222
+    }
+  </style>
+
+
+  <div class="container-fluid">
+    <p>About 
+      {% if about == ['NOT UPLOADED'] %}
+        <img src="{{ url_for('static', filename='img/not_done.png') }}" style="width: 25px; height: 25px; float: right;">
+      {% else %}
+        <img src="{{ url_for('static', filename='img/done.png') }}" style="width: 25px; height: 25px;float: right;">
+      {% endif %}
+    </p>
+    <p>Portfolio 
+      {% if portfolio == [] %}
+        <img src="{{ url_for('static', filename='img/not_done.png') }}" style="width: 25px; height: 25px;float: right;"></p>
+      {% else %}
+        <img src="{{ url_for('static', filename='img/done.png') }}" style="width: 25px; height: 25px;float: right;"></p>
+      {% endif %}
+    </p>
+    <p>Experience
+      {% if experience == [] %}
+        <img src="{{ url_for('static', filename='img/not_done.png') }}" style="width: 25px; height: 25px;float: right;"></p>
+      {% else %}
+        <img src="{{ url_for('static', filename='img/done.png') }}" style="width: 25px; height: 25px;float: right;"></p>
+      {% endif %}
+    </p>
+    <p>Portfolio Categories
+      {% if category == ['All'] %}
+        <img src="{{ url_for('static', filename='img/not_done.png') }}" style="width: 25px; height: 25px;float: right;"></p>
+      {% else %}
+        <img src="{{ url_for('static', filename='img/done.png') }}" style="width: 25px; height: 25px;float: right;"></p>
+      {% endif %}
+
+    </p>
+    <p>Contact
+      {% if contact == [] %}
+        <img src="{{ url_for('static', filename='img/not_done.png') }}" style="width: 25px; height: 25px;float: right;"></p>
+      {% else %}
+        <img src="{{ url_for('static', filename='img/done.png') }}" style="width: 25px; height: 25px;float: right;"></p>
+      {% endif %}
+    </p>
+    <form method="post">
+      <div class="switch-wrap d-flex justify-content-between">
+        <p style="color: #222222" id="txt">Dark theme</p>
+        <p>(Still experimental)</p>
+        <div class="confirm-switch checked">
+          <input type="checkbox" id="default-switch" name='check'>
+          <label for="default-switch"></label>
+        </div>
+      </div>
+      <button type="submit" class="genric-btn primary-border circle arrow" style="margin-top: 30px;">Change color theme<span class="lnr lnr-arrow-right"></span></button>
+    </form>
+  </div>
+
+  <script type="text/javascript">
+    {% if theme[0] == 'on' %}
+      document.getElementById("default-switch").checked = true;
+
+    {% endif %}
+
+  </script>
+
+{% endblock %}

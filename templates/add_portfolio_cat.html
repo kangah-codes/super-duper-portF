@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+<ul class="navbar-nav ml-auto">
+  <li>
+    <h1 class="h3 mb-2 text-gray-800" style="margin-top: 20px;float: right;">Portfolio Categories</h1>
+  </li>
+</ul>
+
+{% endblock %}
+
+
+{% block portfolio %}
+<style type="text/css">
+  h5{
+    color: #222222
+  }
+</style>
+
+<div class="container-fluid">
+  <h5>Existing categories</h5>
+  <ul>
+    {% for _ in exist %}
+      <li>{{ _ }}</li>
+    {% endfor %}
+  </ul>
+	<form method="post" enctype="multipart/form-data">
+    <div class="form-row">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Category" name="name" required>
+      </div>
+    </div>
+		
+		<button type="submit" class="genric-btn primary-border circle arrow" style="margin-top: 30px;">Add category<span class="lnr lnr-arrow-right"></span></button>
+	</form>
+	{% if msg == 'success' %}
+        <div class="alert alert-success" role="alert" style="margin-top: 20px">
+          Added category successfully
+        </div>
+  {% elif msg == 'error' %}
+  <div class="alert alert-danger" role="alert" style="margin-top: 20px; width: 30%">
+    Error adding category
+  </div>
+  {% elif msg == 'exist' %}
+    <div class="alert alert-danger" role="alert" style="margin-top: 20px; width: 30%">
+      Category already exists
+    </div>
+  {% endif %}
+	
+</div>
+
+{% endblock %}

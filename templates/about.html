@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+<ul class="navbar-nav ml-auto">
+  <li>
+    <h1 class="h3 mb-2 text-gray-800" style="margin-top: 20px;float: right;">About</h1>
+  </li>
+</ul>
+
+{% endblock %}
+
+{% block about %}
+
+<div class="container-fluid">
+	<form method="post">
+		<textarea name="about" placeholder="Type short about text" style="width: 100%"></textarea>
+		<button type="submit" class="genric-btn primary-border circle arrow" style="margin-top: 30px;">Add about<span class="lnr lnr-arrow-right"></span></button>
+	</form>
+	{% if msg == 'success' %}
+        <div class="alert alert-success" role="alert" style="margin-top: 20px">
+          Added about text successfully
+        </div>
+    {% elif msg == 'error' %}
+    <div class="alert alert-danger" role="alert" style="margin-top: 20px; width: 30%">
+      Error adding about text
+    </div>
+    {% endif %}
+	
+</div>
+
+{% endblock %}
