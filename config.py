@@ -1,3 +1,5 @@
+__author__ = "Joshua Akangah"
+
 import random
 import string
 
