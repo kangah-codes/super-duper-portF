@@ -103,6 +103,24 @@ class SiteModel:
 			if self.connection:
 				self.connection.close()
 
+	def delete_about(self):
+		try:
+			self.connection = sqlite3.connect(self.name)
+			self.cursor = self.connection.cursor()
+
+			self.cursor.execute(f"UPDATE SITE SET ABOUT='Not Uploaded'")
+
+		except sqlite3.OperationalError as e:
+			return e
+
+		else:
+			return True
+
+		finally:
+			self.connection.commit()
+			if self.connection:
+				self.connection.close()
+
 	def add_portfolio_cat(self, text):
 		try:
 			self.connection = sqlite3.connect(self.name)
@@ -125,6 +143,32 @@ class SiteModel:
 			self.connection.commit()
 			if self.connection:
 				self.connection.close()
+
+	def delete_portfolio_cat(self, cat):
+		try:
+			self.connection = sqlite3.connect(self.name)
+			self.cursor = self.connection.cursor()
+
+			items = json.loads(self.retrieve_portfolio_cat())
+
+			for item in items:
+				if item == cat:
+					items.remove(cat)
+			
+			self.cursor.execute(f"UPDATE SITE SET CATEGORY='{json.dumps(items)}'")
+
+		except sqlite3.OperationalError as e:
+			return e
+
+		else:
+			return True
+
+		finally:
+			self.connection.commit()
+			if self.connection:
+				self.connection.close()
+
+
 
 	def add_portfolio(self, name, client, cat, desc, completed, save_name):
 		try:
@@ -152,6 +196,30 @@ class SiteModel:
 
 		except sqlite3.OperationalError as e:
 			return e
+
+		finally:
+			self.connection.commit()
+			if self.connection:
+				self.connection.close()
+
+	def remove_portfolio(self, name):
+		try:
+			self.connection = sqlite3.connect(self.name)
+			self.cursor = self.connection.cursor()
+
+			items = json.loads(self.retrieve_portfolio())
+
+			for item in items:
+				if name == item[0]:
+					items.remove(item)
+			
+			self.cursor.execute("UPDATE SITE SET PORTFOLIO='{json.dumps(items)}'")
+
+		except sqlite3.OperationalError as e:
+			return e
+
+		else:
+			return True
 
 		finally:
 			self.connection.commit()
@@ -203,7 +271,7 @@ class SiteModel:
 			self.cursor.execute("SELECT PUBLICATIONS FROM SITE")
 			exist_publication = json.loads(self.cursor.fetchone()[0])
 			exist_publication.append([name, date, filename])
-			self.cursor.execute(f"UPDATE SITE SET PUBLICATIONS='{json.dumps(exist_publication)}")
+			self.cursor.execute(f"UPDATE SITE SET PUBLICATIONS='{json.dumps(exist_publication)}'")
 
 		except sqlite3.OperationalError as e:
 			return e
@@ -257,6 +325,8 @@ class SiteModel:
 			self.connection.commit()
 			if self.connection:
 				self.connection.close()
+
+	#def remove_job_exp(self, desc)
 
 	def add_contact(self, contact):
 		try:
