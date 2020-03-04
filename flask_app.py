@@ -273,5 +273,25 @@ def add_skill(session):
 
 	return render_template('add_skill.html', **data)
 
+@app.route('/portal/view_component/<component>/<session>')
+@login_required
+def view_component(component, session):
+	if component == "about":
+		return render_template("about.html")
+	elif c
+
+@app.route('/delete_about', methods=["POST"])
+def delete_about(about_txt):
+	if request.method == "POST":
+		if db.delete_about():
+			return redirect(f'/portal/about/{session}')
+
+@app.route('/delete_cat/<cat>', methods=['POST'])
+def delete_cat(cat):
+	if request.method == "POST":
+		if db.delete_portfolio_cat(cat):
+			return redirect(f"/portal/add_portfolio_cat/{session}")
+
+
 if __name__ == '__main__':
 	app.run(debug=True)
