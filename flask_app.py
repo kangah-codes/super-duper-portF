@@ -291,15 +291,19 @@ def view_component(component, session):
 
 @app.route('/delete_about', methods=["POST"])
 def delete_about(about_txt):
-	if request.method == "POST":
-		if db.delete_about():
-			return redirect(f'/portal/about/{session}')
+	if db.delete_about():
+		return redirect(f'/portal/about/{session}')
 
 @app.route('/delete_cat/<cat>', methods=['POST'])
 def delete_cat(cat):
-	if request.method == "POST":
-		if db.delete_portfolio_cat(cat):
-			return redirect(f"/portal/add_portfolio_cat/{session}")
+	if db.delete_portfolio_cat(cat):
+		return redirect(f"/portal/view_component/category/{session}")
+
+@app.route('/del_portfolio/<portfolio>', methods=["POST"])
+@login_required
+def del_portfolio(portfolio):
+	if db.remove_portfolio(portfolio):
+		return redirect(f"/portal/view_component/portfolio/{session}")
 
 
 if __name__ == '__main__':
