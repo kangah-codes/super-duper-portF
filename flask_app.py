@@ -277,8 +277,17 @@ def add_skill(session):
 @login_required
 def view_component(component, session):
 	if component == "about":
-		return render_template("about.html")
-	elif c
+		return render_template("abouts.html")
+	elif component == "portfolio":
+		return render_template("portfol.html")
+	elif component == "category":
+		return render_template("cat.html")
+	elif component == "experience":
+		return render_template("exp.html")
+	elif component == "education":
+		return render_template("ed.html")
+	elif component == "contact":
+		return render_template("cont.html")
 
 @app.route('/delete_about', methods=["POST"])
 def delete_about(about_txt):
