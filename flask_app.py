@@ -6,7 +6,7 @@ from config import *
 import os
 
 app = Flask(__name__)
-app.config['IMAGE_UPLOADS'] = '/home/akangah89/mysite/static/img/uploads'
+app.config['IMAGE_UPLOADS'] = '/app/static/img/uploads'
 app.secret_key = 'cobby'
 
 db = SiteModel()
