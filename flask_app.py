@@ -36,7 +36,7 @@ def unauth_handler():
 @app.route('/', methods=['GET', 'POST'])
 def index():
 	data = {
-		"about": db.retrieve_about().split('.'),
+		"about": db.retrieve_about().split(','),
 		"category": db.retrieve_portfolio_cat(),
 		"experience": db.retrieve_job_exp(),
 		"contact": db.retrieve_contact(),
